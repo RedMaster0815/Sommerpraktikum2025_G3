@@ -13,6 +13,10 @@
             border-radius:10px;
         }
 
+        thead{
+            background:#03a1fc;
+        }
+
         th, td {
             border: 1px solid #000;
             padding: 6px;
@@ -87,9 +91,6 @@
             });
 
             if (allFilled) {
-                const table = document.getElementById("eingabeTabelle").getElementsByTagName("tbody")[0];
-                const lastRow = table.rows[table.rows.length - 1];
-                const lastInputs = lastRow.querySelectorAll("input");
 
                 let lastRowIsEmpty = true;
                 lastInputs.forEach(inp => {

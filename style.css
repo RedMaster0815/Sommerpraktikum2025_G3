@@ -12,6 +12,9 @@ th, td {
 input {
     width: 90%;
 }
+button {
+    padding: 5px 10px;
+}
 .diagramm-container {
   width: 400px;
 }
