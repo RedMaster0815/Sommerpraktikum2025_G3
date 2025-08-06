@@ -1,5 +1,7 @@
 .diagramm-container {
-  width: 400px;
+  width: 90%;         /* Nimmt 90% der Fensterbreite */
+  max-width: 1000px;  /* Aber maximal 1000px breit */
+  margin: 0 auto;     /* Zentriert horizontal */
 }
 
 .balkendiagramm {
@@ -24,9 +26,16 @@
 }
 
 .balken {
-  height: 25px;
-  background-color: blue;
-  transition: width 0.3s ease;
+  height: clamp(40px, 8vw, 150px);  
+  border-radius: 4px; 
+}
+
+.balken-einnahmen {
+  background-color: green; 
+}
+
+.balken-ausgaben {
+  background-color: red;  
 }
 
 .beschriftung {
@@ -40,4 +49,20 @@
   color: #333;
   border-top: 2px solid black;
   padding-top: 3px;
+}
+
+.home-button {
+  display: inline-block;
+  background-color: #0070F2;  /* Grüner Button */
+  color: white;               /* Weißer Text */
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;      /* Kein Unterstrich */
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #0040B0;  /* Etwas dunkler bei Hover */
 }

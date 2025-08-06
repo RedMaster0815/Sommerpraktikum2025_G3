@@ -7,7 +7,8 @@
         <link rel="stylesheet" href="style.css">
     </head>
 <body>
-    <p><a href="index.html">Zur Startseite</a></p>
+    <p><a href="index.html" class="home-button">← Home</a></p>
+
 
     <div class="diagramm-container">
         <div class="balkendiagramm" id="balkendiagramm"></div>
@@ -15,9 +16,11 @@
       </div>
       
       <script>
+      
       // --- Werte & Labels ---
-      let werte = [80, 50];                  // Einnahmen, Ausgaben
-      let labels = ["Einnahmen", "Ausgaben"];
+      let werte = [8000, 5000];                  // Einnahmen, Ausgaben
+      let labels = ["Einnahmen: Variable", "Ausgaben: Variable"];
+      let klassen = ["balken-einnahmen", "balken-ausgaben"];
       let maxWert = Math.max(...werte, 100); // Skala: nimmt größten Wert oder mind. 100
       
       // --- Balken dynamisch erstellen ---
@@ -30,7 +33,7 @@
       
           // Balken
           let balken = document.createElement('div');
-          balken.classList.add('balken');
+          balken.classList.add('balken', klassen[i]);
           balken.style.width = (wert / maxWert) * 100 + "%";
       
           // Beschriftung
