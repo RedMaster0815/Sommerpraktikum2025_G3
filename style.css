@@ -1,0 +1,43 @@
+.diagramm-container {
+  width: 400px;
+}
+
+.balkendiagramm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 15px;
+  position: relative;
+  background: repeating-linear-gradient(
+    to right,
+    #ddd,
+    #ddd 1px,
+    transparent 1px,
+    transparent 25%
+  );
+}
+
+.zeile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.balken {
+  height: 25px;
+  background-color: blue;
+  transition: width 0.3s ease;
+}
+
+.beschriftung {
+  white-space: nowrap;
+}
+
+.x-achse {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #333;
+  border-top: 2px solid black;
+  padding-top: 3px;
+}

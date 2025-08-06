@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title>Balkendiagramm Einnahmen/Ausgaben</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <p><a href="index.html">Zur Startseite</a></p>
+
+    <div class="diagramm-container">
+        <div class="balkendiagramm" id="balkendiagramm"></div>
+        <div class="x-achse"></div>
+      </div>
+      
+      <script>
+      // --- Werte & Labels ---
+      let werte = [80, 50];                  // Einnahmen, Ausgaben
+      let labels = ["Einnahmen", "Ausgaben"];
+      let maxWert = Math.max(...werte, 100); // Skala: nimmt größten Wert oder mind. 100
+      
+      // --- Balken dynamisch erstellen ---
+      let diagramm = document.getElementById('balkendiagramm');
+      
+      werte.forEach((wert, i) => {
+          // Container für Zeile
+          let zeile = document.createElement('div');
+          zeile.classList.add('zeile');
+      
+          // Balken
+          let balken = document.createElement('div');
+          balken.classList.add('balken');
+          balken.style.width = (wert / maxWert) * 100 + "%";
+      
+          // Beschriftung
+          let beschriftung = document.createElement('div');
+          beschriftung.classList.add('beschriftung');
+          beschriftung.textContent = labels[i];
+      
+          // Alles zusammenfügen
+          zeile.appendChild(balken);
+          zeile.appendChild(beschriftung);
+          diagramm.appendChild(zeile);
+      });
+      
+      // --- X-Achse erstellen ---
+      let xAchse = document.querySelector('.x-achse');
+      let schritte = 4;
+      
+      for (let i = 0; i <= schritte; i++) {
+          let wert = Math.round((maxWert / schritte) * i);
+          let tick = document.createElement('span');
+          tick.textContent = wert + "€";
+          xAchse.appendChild(tick);
+      }
+      </script>
+</body>
+</html>
