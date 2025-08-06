@@ -5,20 +5,33 @@
         <meta name="viewport" content="width=device-width , initial-scale=1.0">
         <title>Balkendiagramm Einnahmen/Ausgaben</title>
         <link rel="stylesheet" href="style.css">
+        <script src="daten.js"></script>
+        <header>
+            <img src="logo_sap.png" alt="logo_sap" style="width: 5%; height: 5%; margin-left: 1400px; margin-top: 5px;">
+        </header>
     </head>
 <body>
-    <p><a href="index.html">Zur Startseite</a></p>
+    <p><a href="index.html" class="home-button">← Home</a></p>
+    <h1>Monatliche Einnahmen und Ausgaben</h1>
 
     <div class="diagramm-container">
         <div class="balkendiagramm" id="balkendiagramm"></div>
         <div class="x-achse"></div>
       </div>
-      
+
       <script>
+      
       // --- Werte & Labels ---
-      let werte = [80, 50];                  // Einnahmen, Ausgaben
-      let labels = ["Einnahmen", "Ausgaben"];
-      let maxWert = Math.max(...werte, 100); // Skala: nimmt größten Wert oder mind. 100
+
+      let wertEinn = 8000; 
+      let wertAusg = 15000;  
+      let wertProf = wertEinn - wertAusg; 
+
+      let werte = [wertEinn, wertAusg, Math.abs(wertProf)];
+      let labels = ["Einnahmen", "Ausgaben", `Ergebnis (${wertProf >= 0 ? "Gewinn" : "Verlust"})`
+];
+      let klassen = ["balken-einnahmen", "balken-ausgaben", wertProf >= 0 ? "balken-profit-positiv" : "balken-profit-negativ"];
+      let maxWert = Math.max(...werte, 100); 
       
       // --- Balken dynamisch erstellen ---
       let diagramm = document.getElementById('balkendiagramm');
@@ -30,7 +43,7 @@
       
           // Balken
           let balken = document.createElement('div');
-          balken.classList.add('balken');
+          balken.classList.add('balken', klassen[i]);
           balken.style.width = (wert / maxWert) * 100 + "%";
       
           // Beschriftung
@@ -54,6 +67,7 @@
           tick.textContent = wert + "€";
           xAchse.appendChild(tick);
       }
+
       </script>
 </body>
 </html>

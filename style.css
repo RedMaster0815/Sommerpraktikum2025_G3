@@ -16,7 +16,14 @@ button {
     padding: 5px 10px;
 }
 .diagramm-container {
-  width: 400px;
+  width: 90%;         /* Nimmt 90% der Fensterbreite */
+  max-width: 1000px;  /* Aber maximal 1000px breit */
+  margin: 0 auto;     /* Zentriert horizontal */
+}
+
+h1 {
+  text-align: center;
+  color: #0070F2;
 }
 
 .balkendiagramm {
@@ -25,6 +32,7 @@ button {
   gap: 10px;
   padding-bottom: 15px;
   position: relative;
+  margin-top: 60px;
   background: repeating-linear-gradient(
     to right,
     #ddd,
@@ -41,13 +49,28 @@ button {
 }
 
 .balken {
-  height: 25px;
-  background-color: blue;
-  transition: width 0.3s ease;
+  height: clamp(40px, 8vw, 150px);  
+  border-radius: 4px; 
+}
+
+.balken-einnahmen {
+  background-color: green; 
+}
+
+.balken-ausgaben {
+  background-color: red;  
+}
+
+.balken-profit-positiv {
+  background-color: gold;
+}
+
+.balken-profit-negativ {
+  background-color: darkred;
 }
 
 .beschriftung {
-  white-space: nowrap;
+  font-size: clamp(12px, 1.5vw, 20px);
 }
 
 .x-achse {
@@ -57,4 +80,23 @@ button {
   color: #333;
   border-top: 2px solid black;
   padding-top: 3px;
+
 }
+
+.home-button {
+  display: inline-block;
+  background-color: #0070F2;  
+  color: white;               /* Weißer Text */
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;      /* Kein Unterstrich */
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #0040B0;  /* Etwas dunkler bei Hover */
+}
+
+
