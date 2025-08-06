@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daten übernehmen & formatieren</title>
+    <style>
+        table {
+            border: 2px solid #000;
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: separate;
+            border-radius:10px;
+        }
+
+        thead{
+            background:#03a1fc;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: center;
+        }
+
+        input {
+            width: 95%;
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Einnahmen</h1>
+
+    <!-- Eingabetabelle -->
+    <table id="eingabeTabelle">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Bezeichnung</th>
+                <th>Wert (€)</th>
+                <th>Zahlungsintervall (Monate)</th>
+                <th>Aktion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="date" oninput="checkRowCompletion(this)"></td>
+                <td><input type="text" oninput="checkRowCompletion(this)"></td>
+                <td><input type="number" step="0.01" oninput="checkRowCompletion(this)"></td>
+                <td><input type="number" oninput="checkRowCompletion(this)"></td>
+                <td><button onclick="uebernehmen(this)">Übernehmen</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Ausgabetabelle -->
+    <table id="ausgabeTabelle">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Bezeichnung</th>
+                <th>Wert</th>
+                <th>Zahlungsintervall</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Hier erscheinen übernommene Zeilen -->
+        </tbody>
+    </table>
+
+    <script>
+        // Funktion zum Formatieren von Euro-Beträgen im deutschen Format
+        function formatEuro(amount) {
+            const euro = parseFloat(amount);
+            if (isNaN(euro)) return "";
+            return euro.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
+        }
+
+        function checkRowCompletion(input) {
+            const row = input.closest("tr");
+            const inputs = row.querySelectorAll("input");
+
+            let allFilled = true;
+            inputs.forEach(inp => {
+                if (!inp.value.trim()) {
+                    allFilled = false;
+                }
+            });
+
+            if (allFilled) {
+
+                let lastRowIsEmpty = true;
+                lastInputs.forEach(inp => {
+                    if (inp.value.trim()) {
+                        lastRowIsEmpty = false;
+                    }
+                });
+
+                if (!lastRowIsEmpty) {
+                    const newRow = table.insertRow();
+                    for (let i = 0; i < 4; i++) {
+                        const cell = newRow.insertCell();
+                        let inputType = (i === 0) ? "date" : "number";
+                        if (i === 1) inputType = "text";
+
+                        const input = document.createElement("input");
+                        input.type = inputType;
+                        if (i === 2) input.step = "0.01"; // Für Euro-Zahlen
+                        input.oninput = function () { checkRowCompletion(this); };
+                        cell.appendChild(input);
+                    }
+
+                    // Button-Zelle
+                    const buttonCell = newRow.insertCell();
+                    const button = document.createElement("button");
+                    button.innerText = "Übernehmen";
+                    button.onclick = function () { uebernehmen(this); };
+                    buttonCell.appendChild(button);
+                }
+            }
+        }
+
+        function uebernehmen(button) {
+            const row = button.closest("tr");
+            const inputs = row.querySelectorAll("input");
+
+            const datum = inputs[0].value.trim();
+            const bezeichnung = inputs[1].value.trim();
+            const wertRaw = inputs[2].value.trim();
+            const intervallRaw = inputs[3].value.trim();
+
+            if (!datum || !bezeichnung || !wertRaw || !intervallRaw) {
+                alert("Bitte alle Felder ausfüllen.");
+                return;
+            }
+
+            const wertFormatiert = formatEuro(wertRaw);
+            const intervallText = `${parseInt(intervallRaw)} Monat${intervallRaw == 1 ? '' : 'e'}`;
+
+            // Neue Zeile in Ausgabetabelle
+            const ausgabeTabelle = document.getElementById("ausgabeTabelle").getElementsByTagName("tbody")[0];
+            const newRow = ausgabeTabelle.insertRow();
+
+            [datum, bezeichnung, wertFormatiert, intervallText].forEach(val => {
+                const cell = newRow.insertCell();
+                cell.textContent = val;
+            });
+
+            // Eingabefelder leeren
+            inputs.forEach(input => {
+                input.value = "";
+            });
+        }
+    </script>
+
+</body>
+</html>
