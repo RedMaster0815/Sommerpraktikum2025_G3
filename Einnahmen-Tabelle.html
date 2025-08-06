@@ -73,6 +73,8 @@
     </table>
 
     <script>
+        var wertEinn = 0;
+
         // Funktion zum Formatieren von Euro-Beträgen im deutschen Format
         function formatEuro(amount) {
             const euro = parseFloat(amount);
@@ -133,6 +135,8 @@
             const wertRaw = inputs[2].value.trim();
             const intervallRaw = inputs[3].value.trim();
 
+            wertEinn === wertEinn + wertRaw;
+
             if (!datum || !bezeichnung || !wertRaw || !intervallRaw) {
                 alert("Bitte alle Felder ausfüllen.");
                 return;
@@ -155,6 +159,7 @@
                 input.value = "";
             });
         }
+        var wertFormatiert = formatEuro(wertEinn);
     </script>
 
 </body>
