@@ -29,7 +29,6 @@
   }
   button:hover{
     cursor: pointer;
-    color: white;
   }
   h1{
     color: black;
@@ -51,28 +50,49 @@
   <meta name="viewport" content="width= device-width, initial-scale=1.0">
   <meta charset="utf-8" />
   <title>Startseite Finanztool</title>
-  <header>
+  <header style="position: sticky; top: 0;">
     <img src="logo_sap.png" alt="logo_sap" style="width: 5%; height: 5%; margin-left: 80px; margin-top: 5px;">
 
     <button class="button-sign_in" style="width: 100px; height: 30px; margin-right: 20px; margin-top: 5px; position: absolute; right: 10%; background-color: lightgray; color: black; border-radius: 6px;"><b>Sign In</b></button>
     <button class="button-register" style="width: 100px; height: 30px; margin-right: 20px; margin-top: 5px; position: absolute; right: 2.5%; background-color: rgb(49, 49, 49); color: white; border-radius: 6px;"><b>Register</b></button>
   </header>
 </head>
-<body>
-  <header style="background-color: rgb(231, 231, 231); height: 350px; display:flex; align-items: center; justify-content: center">
+<body style="width: auto; height: 2000px;">
+  <header style="background-color: rgb(231, 231, 231); height: 400px; display:flex; align-items: center; justify-content: center">
     <div style="align-items: center; justify-content: center">
       <h1>SAP Insight Financials</h1>
       <br/>
       <h2>sicherer Haushalt für deine Finanzen</h2>
     </div>
   </header>
-  Unterstützen Sie jedes Team mit unseren Features
+  <p style="font-family: Arial, Helvetica, sans-serif; font-size: 17px; color: #0070f2;"><b>Unterstützen Sie jedes Team mit unseren Features</b></p>
+  <br><br><br><br><br><br>
   <center><table>
     <tr>
-      <td style="width: 400px; text-align: center;"><p><a href="Balkendiagramm.html">Zum Balkendiagramm</a></p></td>
-      <td style="width: 400px; text-align: center;"><p><a href="Einnahmen-Tabelle.html">Zur Einnahmen-Tabelle</a></p></td>
-      <td style="width: 400px; text-align: center;"><p><a href="Ausgaben-Tabelle.html">Zur Ausgaben-Tabelle</a></p></td>
+      <td><img src="dollarzeichen.png" alt="dollar" style="margin: auto; display: block; width: 50%; top: 30%;"></td>
+      <td><img src="liniendiagramm.png" alt="liniendiagramm" style="margin: auto; display: block; width: 50%; top: 30%;"></td>
+      <td><img src="profil.png" alt="Person" style="margin: auto; display: block; width: 50%; top: 30%;"></td>
+    </tr>
+    <tr style="text-align: center; color: black; font-family: Arial, Helvetica, sans-serif; font-size: 25px;">
+      <td><p><b>monatliches Management</b></p></td>
+      <td><p><b>jährliche Entwicklung</b></p></td>
+      <td><p><b>manuelle Steuerung</b></p></td>
+    </tr>
+    <tr style="text-align: center; color: black; font-family: Arial, Helvetica, sans-serif;">
+      <td style="height: 70px; width: 400px; text-align: center; bottom: 10%;"><button class="button-sign_in" style="height: 30px; background-color: lightgray; color: black; border-radius: 6px;" onclick="window.location.href='Liniendiagramm.html'"><b>Balkendiagramm</b></button></td>
+      <td style="height: 70px; width: 400px; text-align: center; bottom: 10%;"><button class="button-sign_in" style="height: 30px; background-color: lightgray; color: black; border-radius: 6px;" onclick="window.location.href='Balkendiagramm.html'"><b>Liniendiagramm</b></button></td>
+      <td style="height: 70px; width: 400px; text-align: center; bottom: 10%;"><button class="button-sign_in" style="height: 30px; background-color: lightgray; color: black; border-radius: 6px;" onclick="window.location.href='Ausgaben-Tabelle.html'"><b>Ausgaben-Tabelle</b></button><p>         </p><button class="button-sign_in" style="height: 30px; background-color: lightgray; color: black; border-radius: 6px;" onclick="window.location.href='Einnahmen-Tabelle.html'"><b>Einnahmen-Tabelle</b></button></td>
     </tr>
   </table></center>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <footer style="width: auto; height: 400px; background-color: #0070f2;">
+
+  </footer>
 </body>
 </html>
