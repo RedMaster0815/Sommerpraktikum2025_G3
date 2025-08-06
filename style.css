@@ -1,3 +1,20 @@
+table {
+    border: 10px solid black;
+    width: 80%;
+    margin: auto;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+}
+input {
+    width: 90%;
+}
+button {
+    padding: 5px 10px;
+}
 .diagramm-container {
   width: 90%;         /* Nimmt 90% der Fensterbreite */
   max-width: 1000px;  /* Aber maximal 1000px breit */
@@ -63,6 +80,7 @@ h1 {
   color: #333;
   border-top: 2px solid black;
   padding-top: 3px;
+
 }
 
 .home-button {
@@ -80,4 +98,5 @@ h1 {
 .home-button:hover {
   background-color: #0040B0;  /* Etwas dunkler bei Hover */
 }
+
 

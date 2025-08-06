@@ -31,7 +31,7 @@
       let labels = ["Einnahmen", "Ausgaben", `Ergebnis (${wertProf >= 0 ? "Gewinn" : "Verlust"})`
 ];
       let klassen = ["balken-einnahmen", "balken-ausgaben", wertProf >= 0 ? "balken-profit-positiv" : "balken-profit-negativ"];
-      let maxWert = Math.max(...werte, 100); // Skala: nimmt größten Wert oder mind. 100
+      let maxWert = Math.max(...werte, 100); 
       
       // --- Balken dynamisch erstellen ---
       let diagramm = document.getElementById('balkendiagramm');
