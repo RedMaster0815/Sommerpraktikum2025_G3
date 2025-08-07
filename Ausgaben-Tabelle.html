@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daten übernehmen & formatieren</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         table {
             border: 2px solid #000;
@@ -12,28 +14,35 @@
             border-collapse: separate;
             border-radius:10px;
         }
-
         thead{
             background:#03a1fc;
         }
-
         th, td {
             border: 1px solid #000;
             padding: 6px;
             text-align: center;
         }
-
         input {
             width: 95%;
         }
-
         button {
             padding: 5px 10px;
         }
+        .spacer {
+            height: 300px;
+        }
     </style>
 </head>
-<body>
-    <h1>Ausgaben</h1>
+<body style="height: 1500px;">
+    <header id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 40px 40px; background: white; border-radius: 8px; position: sticky; top: 0;">
+        <a href="index.html" style="display: flex; align-items: center;">
+            <img src="logo_sap.png" alt="logo_sap" style="width: 70px; height: auto; border: none; background: none; cursor: pointer;">
+        </a>
+        <div id="header-center" style="flex: 1; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 25px;"></div>
+        <!-- Buttons entfernt -->
+    </header>
+
+    <h1 id="page-title" style="text-align: center;">Ausgaben</h1>
 
     <!-- Eingabetabelle -->
     <table id="eingabeTabelle">
@@ -72,6 +81,42 @@
         </tbody>
     </table>
 
+    <div style="height: 1500px;"></div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Finanztool</h3>
+                <p>Dein Tool für den sicheren Haushalt.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="#">Startseite</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="#">Impressum</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <p>Email: info@finanztool.de</p>
+                <p>Tel: 01234 / 567890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Folge uns</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+                    <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+                    <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Finanztool. Alle Rechte vorbehalten.
+        </div>
+    </footer>
+
     <script>
         var wertAusg = 0;
 
@@ -93,37 +138,7 @@
                 }
             });
 
-            if (allFilled) {
-
-                let lastRowIsEmpty = true;
-                lastInputs.forEach(inp => {
-                    if (inp.value.trim()) {
-                        lastRowIsEmpty = false;
-                    }
-                });
-
-                if (!lastRowIsEmpty) {
-                    const newRow = table.insertRow();
-                    for (let i = 0; i < 4; i++) {
-                        const cell = newRow.insertCell();
-                        let inputType = (i === 0) ? "date" : "number";
-                        if (i === 1) inputType = "text";
-
-                        const input = document.createElement("input");
-                        input.type = inputType;
-                        if (i === 2) input.step = "0.01"; // Für Euro-Zahlen
-                        input.oninput = function () { checkRowCompletion(this); };
-                        cell.appendChild(input);
-                    }
-
-                    // Button-Zelle
-                    const buttonCell = newRow.insertCell();
-                    const button = document.createElement("button");
-                    button.innerText = "Übernehmen";
-                    button.onclick = function () { uebernehmen(this); };
-                    buttonCell.appendChild(button);
-                }
-            }
+            // ...optional: weitere Logik...
         }
 
         function uebernehmen(button) {
@@ -134,8 +149,6 @@
             const bezeichnung = inputs[1].value.trim();
             const wertRaw = inputs[2].value.trim();
             const intervallRaw = inputs[3].value.trim();
-
-            wertAusg === wertAusg + wertRaw;
 
             if (!datum || !bezeichnung || !wertRaw || !intervallRaw) {
                 alert("Bitte alle Felder ausfüllen.");
@@ -159,8 +172,30 @@
                 input.value = "";
             });
         }
-        var wertFormatiert = formatEuro(wertAusg);
-    </script>
 
+        // Sichtbarkeit des Titels im Header wie auf index.html
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageTitle = document.getElementById('page-title');
+            const headerCenter = document.getElementById('header-center');
+            const mainHeader = document.getElementById('main-header');
+
+            function checkTitleVisibility() {
+                if (!pageTitle || !headerCenter || !mainHeader) return;
+                const rect = pageTitle.getBoundingClientRect();
+                const headerHeight = mainHeader.offsetHeight;
+                if (rect.bottom <= headerHeight) {
+                    headerCenter.textContent = "Ausgaben";
+                    headerCenter.classList.add('visible');
+                } else {
+                    headerCenter.textContent = "";
+                    headerCenter.classList.remove('visible');
+                }
+            }
+
+            window.addEventListener('scroll', checkTitleVisibility);
+            window.addEventListener('resize', checkTitleVisibility);
+            checkTitleVisibility();
+        });
+    </script>
 </body>
 </html>
