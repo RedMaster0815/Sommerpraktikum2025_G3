@@ -118,7 +118,7 @@
     </footer>
 
     <script>
-        var wertEinn = 0;
+        var wertEinn = Number(localStorage.getItem("wertEinn")) || 0;
 
         // Funktion zum Formatieren von Euro-Beträgen im deutschen Format
         function formatEuro(amount) {
@@ -149,6 +149,9 @@
             const bezeichnung = inputs[1].value.trim();
             const wertRaw = inputs[2].value.trim();
             const intervallRaw = inputs[3].value.trim();
+
+            wertEinn = wertEinn + parseFloat(wertRaw);
+            localStorage.setItem("wertEinn", wertEinn);
 
             if (!datum || !bezeichnung || !wertRaw || !intervallRaw) {
                 alert("Bitte alle Felder ausfüllen.");

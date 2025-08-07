@@ -64,14 +64,15 @@
 
     <script>
     // --- Werte & Labels ---
-    let wertEinn = 15000;   // Einnahmen jetzt größer
-    let wertAusg = 8000;    // Ausgaben kleiner
-    let wertProf = wertEinn - wertAusg; 
+      var wertEinn = Number(localStorage.getItem("wertEinn")) || 0;
+      var wertAusg = Number(localStorage.getItem("wertAusg")) || 0;
+      var wertProf = wertEinn - wertAusg;
 
-    let werte = [wertEinn, wertAusg, Math.abs(wertProf)];
-    let labels = ["Einnahmen", "Ausgaben", `Ergebnis (${wertProf >= 0 ? "Gewinn" : "Verlust"})`];
-    let klassen = ["balken-einnahmen", "balken-ausgaben", wertProf >= 0 ? "balken-profit-positiv" : "balken-profit-negativ"];
-    let maxWert = Math.max(...werte, 100); 
+      let werte = [wertEinn, wertAusg, Math.abs(wertProf)];
+      let labels = ["Einnahmen", "Ausgaben", `Ergebnis (${wertProf >= 0 ? "Gewinn" : "Verlust"})`
+];
+      let klassen = ["balken-einnahmen", "balken-ausgaben", wertProf >= 0 ? "balken-profit-positiv" : "balken-profit-negativ"];
+      let maxWert = Math.max(...werte, 100); 
     
     // --- Balken dynamisch erstellen ---
     let diagramm = document.getElementById('balkendiagramm');
@@ -80,17 +81,16 @@
         // Container für Zeile
         let zeile = document.createElement('div');
         zeile.classList.add('zeile');
-    
         // Balken
         let balken = document.createElement('div');
         balken.classList.add('balken', klassen[i]);
         balken.style.width = (wert / maxWert) * 100 + "%";
-    
+
         // Beschriftung
         let beschriftung = document.createElement('div');
         beschriftung.classList.add('beschriftung');
         beschriftung.textContent = labels[i];
-    
+
         // Alles zusammenfügen
         zeile.appendChild(balken);
         zeile.appendChild(beschriftung);

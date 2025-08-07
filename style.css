@@ -105,11 +105,12 @@ input {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 .balken {
-  height: clamp(40px, 8vw, 150px);  
-  border-radius: 4px; 
+  height: clamp(40px, 8vw, 150px);
+  border-radius: 4px;
 }
 
 .balken-einnahmen {
@@ -117,7 +118,7 @@ input {
 }
 
 .balken-ausgaben {
-  background-color: darkorange;  /* Rot-Orange */
+  background-color: red;  
 }
 
 .balken-profit-positiv {
@@ -263,4 +264,7 @@ input {
     pointer-events: none;
 }
 
-
+.balken-wrapper {
+  flex: 1;
+  display: flex;
+}
