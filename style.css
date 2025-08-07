@@ -252,5 +252,8 @@ input {
   color: #000;
   letter-spacing: 1px;
 }
+table {
+    background: white;
+}
 
 
