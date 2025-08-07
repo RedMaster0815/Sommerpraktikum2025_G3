@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <title>Liniendiagramm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .diagramm-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 30px 20px 20px 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 40px 40px; background: white; border-radius: 8px; position: sticky; top: 0; z-index: 1000;">
+        <a href="index.html" style="display: flex; align-items: center;">
+            <img src="logo_sap.png" alt="logo_sap" style="width: 70px; height: auto; border: none; background: none; cursor: pointer;">
+        </a>
+        <div id="header-center" style="flex: 1; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 25px;"></div>
+        <!-- Keine Buttons -->
+    </header>
+
+    <h1 id="page-title" style="text-align: center;">Liniendiagramm</h1>
+
+    <div class="diagramm-container">
+        <canvas id="liniendiagramm"></canvas>
+    </div>
+
+    <div style="height: 1500px;"></div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Finanztool</h3>
+                <p>Dein Tool für den sicheren Haushalt.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="#">Impressum</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <p>Email: info@finanztool.de</p>
+                <p>Tel: 01234 / 567890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Folge uns</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+                    <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+                    <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Finanztool. Alle Rechte vorbehalten.
+        </div>
+    </footer>
+
+    <script>
+        // Beispiel-Daten für das Liniendiagramm
+        const labels = [
+            "Jan", "Feb", "Mrz", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"
+        ];
+        const data = [
+            120, 125, 130, 128, 135, 140, 138, 142, 145, 150, 155, 160
+        ];
+
+        const ctx = document.getElementById('liniendiagramm').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'SAP Kurs',
+                    data: data,
+                    borderColor: '#03a1fc',
+                    backgroundColor: 'rgba(3,161,252,0.1)',
+                    tension: 0.2,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#03a1fc',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Monat'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Kurs (€)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Sichtbarkeit des Titels im Header wie auf den anderen Seiten
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageTitle = document.getElementById('page-title');
+            const headerCenter = document.getElementById('header-center');
+            const mainHeader = document.getElementById('main-header');
+
+            function checkTitleVisibility() {
+                if (!pageTitle || !headerCenter || !mainHeader) return;
+                const rect = pageTitle.getBoundingClientRect();
+                const headerHeight = mainHeader.offsetHeight;
+                if (rect.bottom <= headerHeight) {
+                    headerCenter.textContent = "Liniendiagramm";
+                    headerCenter.classList.add('visible');
+                } else {
+                    headerCenter.textContent = "";
+                    headerCenter.classList.remove('visible');
+                }
+            }
+
+            window.addEventListener('scroll', checkTitleVisibility);
+            window.addEventListener('resize', checkTitleVisibility);
+            checkTitleVisibility();
+        });
+    </script>
+</body>
+</html>
