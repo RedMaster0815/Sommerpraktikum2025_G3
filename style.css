@@ -245,15 +245,28 @@ input {
   justify-content: center;
 }
 #header-center {
-  flex: 1;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-  letter-spacing: 1px;
+    flex: 1;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    letter-spacing: 1px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #0070f2;
 }
 table {
     background: white;
+}
+.login-container h2, .register-container h2 {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #222;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 
