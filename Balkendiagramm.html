@@ -1,73 +1,136 @@
 <!DOCTYPE html>
-<html lang="de">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width , initial-scale=1.0">
-        <title>Balkendiagramm Einnahmen/Ausgaben</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="daten.js"></script>
-        <header>
-            <img src="logo_sap.png" alt="logo_sap" style="width: 5%; height: 5%; margin-left: 1400px; margin-top: 5px;">
-        </header>
-    </head>
-<body>
-    <p><a href="index.html" class="home-button">← Home</a></p>
-    <h1>Monatliche Einnahmen und Ausgaben</h1>
+<html lang="de" style="background-color: rgb(240,240,240);">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <title>Balkendiagramm Einnahmen/Ausgaben</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Optional: Zusätzliche Styles für Tabellen oder Diagramm */
+    </style>
+</head>
+<body style="height: 1500px;">
+    <header id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 40px 40px; background: white; border-radius: 8px; position: sticky; top: 0; z-index: 1000;">
+        <a href="index.html" style="display: flex; align-items: center;">
+            <img src="logo_sap.png" alt="logo_sap" style="width: 70px; height: auto; border: none; background: none; cursor: pointer;">
+        </a>
+        <div id="header-center" style="flex: 1; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 25px;"></div>
+        <!-- Keine Buttons -->
+    </header>
+
+    <h1 id="page-title" style="text-align: center;">Balkendiagramm</h1>
 
     <div class="diagramm-container">
         <div class="balkendiagramm" id="balkendiagramm"></div>
         <div class="x-achse"></div>
-      </div>
+    </div>
 
-      <script>
-      
-      // --- Werte & Labels ---
+    <div style="height: 1500px;"></div>
 
-      let wertEinn = 8000; 
-      let wertAusg = 15000;  
-      let wertProf = wertEinn - wertAusg; 
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Finanztool</h3>
+                <p>Dein Tool für den sicheren Haushalt.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="#">Impressum</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <p>Email: info@finanztool.de</p>
+                <p>Tel: 01234 / 567890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Folge uns</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+                    <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+                    <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Finanztool. Alle Rechte vorbehalten.
+        </div>
+    </footer>
 
-      let werte = [wertEinn, wertAusg, Math.abs(wertProf)];
-      let labels = ["Einnahmen", "Ausgaben", `Ergebnis (${wertProf >= 0 ? "Gewinn" : "Verlust"})`
-];
-      let klassen = ["balken-einnahmen", "balken-ausgaben", wertProf >= 0 ? "balken-profit-positiv" : "balken-profit-negativ"];
-      let maxWert = Math.max(...werte, 100); 
-      
-      // --- Balken dynamisch erstellen ---
-      let diagramm = document.getElementById('balkendiagramm');
-      
-      werte.forEach((wert, i) => {
-          // Container für Zeile
-          let zeile = document.createElement('div');
-          zeile.classList.add('zeile');
-      
-          // Balken
-          let balken = document.createElement('div');
-          balken.classList.add('balken', klassen[i]);
-          balken.style.width = (wert / maxWert) * 100 + "%";
-      
-          // Beschriftung
-          let beschriftung = document.createElement('div');
-          beschriftung.classList.add('beschriftung');
-          beschriftung.textContent = labels[i];
-      
-          // Alles zusammenfügen
-          zeile.appendChild(balken);
-          zeile.appendChild(beschriftung);
-          diagramm.appendChild(zeile);
-      });
-      
-      // --- X-Achse erstellen ---
-      let xAchse = document.querySelector('.x-achse');
-      let schritte = 4;
-      
-      for (let i = 0; i <= schritte; i++) {
-          let wert = Math.round((maxWert / schritte) * i);
-          let tick = document.createElement('span');
-          tick.textContent = wert + "€";
-          xAchse.appendChild(tick);
-      }
+    <script>
+    // --- Werte & Labels ---
+    let wertEinn = 15000;   // Einnahmen jetzt größer
+    let wertAusg = 8000;    // Ausgaben kleiner
+    let wertProf = wertEinn - wertAusg; 
 
-      </script>
+    let werte = [wertEinn, wertAusg, Math.abs(wertProf)];
+    let labels = ["Einnahmen", "Ausgaben", `Ergebnis (${wertProf >= 0 ? "Gewinn" : "Verlust"})`];
+    let klassen = ["balken-einnahmen", "balken-ausgaben", wertProf >= 0 ? "balken-profit-positiv" : "balken-profit-negativ"];
+    let maxWert = Math.max(...werte, 100); 
+    
+    // --- Balken dynamisch erstellen ---
+    let diagramm = document.getElementById('balkendiagramm');
+    
+    werte.forEach((wert, i) => {
+        // Container für Zeile
+        let zeile = document.createElement('div');
+        zeile.classList.add('zeile');
+    
+        // Balken
+        let balken = document.createElement('div');
+        balken.classList.add('balken', klassen[i]);
+        balken.style.width = (wert / maxWert) * 100 + "%";
+    
+        // Beschriftung
+        let beschriftung = document.createElement('div');
+        beschriftung.classList.add('beschriftung');
+        beschriftung.textContent = labels[i];
+    
+        // Alles zusammenfügen
+        zeile.appendChild(balken);
+        zeile.appendChild(beschriftung);
+        diagramm.appendChild(zeile);
+    });
+    
+    // --- X-Achse erstellen ---
+    let xAchse = document.querySelector('.x-achse');
+    let schritte = 4;
+    
+    for (let i = 0; i <= schritte; i++) {
+        let wert = Math.round((maxWert / schritte) * i);
+        let tick = document.createElement('span');
+        tick.textContent = wert + "€";
+        xAchse.appendChild(tick);
+    }
+
+    // Sichtbarkeit des Titels im Header wie auf index.html/Einnahmen/Ausgaben
+    document.addEventListener('DOMContentLoaded', function() {
+        const pageTitle = document.getElementById('page-title');
+        const headerCenter = document.getElementById('header-center');
+        const mainHeader = document.getElementById('main-header');
+
+        function checkTitleVisibility() {
+            if (!pageTitle || !headerCenter || !mainHeader) return;
+            const rect = pageTitle.getBoundingClientRect();
+            const headerHeight = mainHeader.offsetHeight;
+            if (rect.bottom <= headerHeight) {
+                headerCenter.textContent = "Balkendiagramm";
+                headerCenter.classList.add('visible');
+            } else {
+                headerCenter.textContent = "";
+                headerCenter.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', checkTitleVisibility);
+        window.addEventListener('resize', checkTitleVisibility);
+        checkTitleVisibility();
+    });
+    </script>
 </body>
 </html>
