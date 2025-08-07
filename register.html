@@ -62,7 +62,7 @@
         <h2 style="font-family: 'Montserrat', Arial, Helvetica, sans-serif; font-size: 2.2rem; font-weight: 700; color: #222; letter-spacing: 1px; margin-bottom: 30px; text-align: center;">Registrieren</h2>
         <form id="register-form">
             <input type="text" placeholder="Benutzername" required>
-            <input type="email" placeholder="E-Mail" required>
+            <input type="email" id="email" placeholder="E-Mail (@sap.com)" required pattern="^[a-zA-Z0-9._%+-]+@sap\.com$">
             <input type="password" placeholder="Passwort" required>
             <input type="password" placeholder="Passwort wiederholen" required>
             <button type="submit">Registrieren</button>
@@ -71,6 +71,13 @@
     </div>
     <script>
         document.getElementById('register-form').addEventListener('submit', function(e) {
+            const emailInput = document.getElementById('email');
+            if (!emailInput.value.match(/^[a-zA-Z0-9._%+-]+@sap\.com$/)) {
+                alert('Bitte gib eine gültige @sap.com E-Mail-Adresse ein!');
+                emailInput.focus();
+                e.preventDefault();
+                return false;
+            }
             e.preventDefault();
             window.location.href = 'index.html';
         });
